@@ -48,23 +48,23 @@ const VideoPreview = () => {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-[84px] h-[84px] relative pointer-events-auto cursor-pointer group">
               {/* Button Background with Blur Effect */}
-              <div 
+              <div
                 className="absolute inset-0 bg-[#1A1A1A]/80 backdrop-blur-md rounded-full transition-all duration-300 group-hover:scale-110 group-hover:bg-[#000000]"
                 style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)' }}
               />
-              
+
               {/* Play Icon (Triangle) */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <svg 
-                  width="28" 
-                  height="30" 
-                  viewBox="0 0 28 30" 
-                  fill="none" 
+                <svg
+                  width="28"
+                  height="30"
+                  viewBox="0 0 28 30"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className="ml-1 transition-transform duration-300 group-hover:translate-x-0.5"
                 >
-                  <path 
-                    d="M25.5 13.4019C26.8333 14.1717 26.8333 16.0959 25.5 16.8657L4.5 28.9901C3.16667 29.7599 1.5 28.7977 1.5 27.2582L1.5 3.00947C1.5 1.47002 3.16667 0.507843 4.5 1.27764L25.5 13.4019Z" 
+                  <path
+                    d="M25.5 13.4019C26.8333 14.1717 26.8333 16.0959 25.5 16.8657L4.5 28.9901C3.16667 29.7599 1.5 28.7977 1.5 27.2582L1.5 3.00947C1.5 1.47002 3.16667 0.507843 4.5 1.27764L25.5 13.4019Z"
                     fill="white"
                   />
                 </svg>

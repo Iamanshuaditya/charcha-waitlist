@@ -1,19 +1,21 @@
 import Navbar from "@/components/sections/navbar";
 import HeroSection from "@/components/sections/hero";
-import VideoPreview from "@/components/sections/video-preview";
-import FAQSection from "@/components/sections/faq";
+import ProductPreview from "@/components/sections/product-preview";
+import WhyChacha from "@/components/sections/why-chacha";
+import ForCreators from "@/components/sections/for-creators";
+import EventMode from "@/components/sections/event-mode";
 import Footer from "@/components/sections/footer";
-import FloatingWidget from "@/components/sections/floating-widget";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background text-foreground scroll-smooth">
       <Navbar />
       <HeroSection />
-      <VideoPreview />
-      <FAQSection />
+      <WhyChacha />
+      <ProductPreview />
+      <ForCreators />
+      <EventMode />
       <Footer />
-      <FloatingWidget />
     </main>
   );
 }
