@@ -2,6 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+
+import { Sparkles, Ticket } from 'lucide-react';
 
 const HeroSection = () => {
   const [email, setEmail] = React.useState('');
@@ -43,11 +46,18 @@ const HeroSection = () => {
         </p>
 
         {/* Waitlist Form */}
-        <div className="w-full mb-10">
-          <div className="relative h-[64px] w-full max-w-[480px] mx-auto">
+        <div className="w-full mb-10 h-[80px] flex justify-center items-center">
+          <AnimatePresence mode="wait">
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="relative flex items-center w-full group transition-all duration-300">
-                <div className="relative w-full shadow-lg rounded-full">
+              <motion.form
+                key="form"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                onSubmit={handleSubmit}
+                className="relative flex items-center w-full max-w-[480px] group"
+              >
+                <div className="relative w-full shadow-lg rounded-full overflow-hidden">
                   <input
                     type="email"
                     value={email}
@@ -58,18 +68,36 @@ const HeroSection = () => {
                   />
                   <button
                     type="submit"
-                    className="absolute right-2 top-2 bottom-2 px-8 bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-semibold rounded-full hover:bg-white transition-all btn-transition active:scale-95 whitespace-nowrap"
+                    className="absolute right-2 top-2 bottom-2 px-8 bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-semibold rounded-full hover:bg-white transition-all btn-transition active:scale-95 whitespace-nowrap flex items-center gap-2"
                   >
                     Join the Party
                   </button>
                 </div>
-              </form>
+              </motion.form>
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-[#d8c3a5] rounded-full animate-in fade-in zoom-in duration-300">
-                <span className="text-[#0f2f2f] font-bold text-lg">Welcome to the party! 🚀</span>
-              </div>
+              <motion.div
+                key="success"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", bounce: 0.5 }}
+                className="relative group cursor-default"
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#d8c3a5] to-[#bfa07a] rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div className="relative flex items-center gap-6 px-8 py-4 bg-[#0f2f2f] border border-[#d8c3a5]/50 rounded-xl shadow-2xl">
+                  <div className="w-12 h-12 rounded-full bg-[#d8c3a5]/10 flex items-center justify-center border border-[#d8c3a5]">
+                    <Ticket className="text-[#d8c3a5] w-6 h-6" />
+                  </div>
+                  <div className="text-left">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-[#d8c3a5] font-bold text-lg">YOU'RE ON THE LIST</h3>
+                      <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
+                    </div>
+                    <p className="text-gray-400 text-sm font-mono">Position: <span className="text-white">#2,401</span></p>
+                  </div>
+                </div>
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </div>
 
         {/* Social Proof */}
