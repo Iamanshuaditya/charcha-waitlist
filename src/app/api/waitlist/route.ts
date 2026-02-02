@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { pool } from '@/lib/db';
 
+const BASE_COUNT = 1000; // Starting offset to show existing interest
+
 export async function POST(req: NextRequest) {
     try {
         const { email } = await req.json();
@@ -29,7 +31,11 @@ export async function POST(req: NextRequest) {
 
         await pool.query(insertQuery, [email]);
 
-        return NextResponse.json({ success: true, message: 'Joined the waitlist!' });
+        // Get the updated count
+        const countResult = await pool.query('SELECT COUNT(*) as count FROM email_list');
+        const count = parseInt(countResult.rows[0].count, 10) + BASE_COUNT;
+
+        return NextResponse.json({ success: true, message: 'Joined the waitlist!', count });
     } catch (error: any) {
         console.error('Database error:', error);
         return NextResponse.json(

@@ -12,17 +12,21 @@ const HeroSection = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [curatorCount, setCuratorCount] = React.useState(1000);
 
-  // Animated counter effect - slowly increases the curator count
+  // Fetch the global counter from the database on mount
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCuratorCount(prev => {
-        // Random increment between 1-3 to make it feel organic
-        const increment = Math.floor(Math.random() * 3) + 1;
-        return prev + increment;
-      });
-    }, 8000); // Increment every 8 seconds for realistic feel
+    const fetchCount = async () => {
+      try {
+        const response = await fetch('/api/counter');
+        if (response.ok) {
+          const data = await response.json();
+          setCuratorCount(data.count);
+        }
+      } catch (error) {
+        console.error('Error fetching counter:', error);
+      }
+    };
 
-    return () => clearInterval(interval);
+    fetchCount();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,6 +43,10 @@ const HeroSection = () => {
         });
 
         if (response.ok) {
+          const data = await response.json();
+          if (data.count) {
+            setCuratorCount(data.count);
+          }
           setIsSubmitted(true);
         } else {
           console.error('Failed to join waitlist');
