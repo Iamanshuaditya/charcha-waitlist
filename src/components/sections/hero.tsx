@@ -9,11 +9,32 @@ import { Sparkles, Ticket } from 'lucide-react';
 const HeroSection = () => {
   const [email, setEmail] = React.useState('');
   const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setIsSubmitted(true);
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        if (response.ok) {
+          setIsSubmitted(true);
+        } else {
+          console.error('Failed to join waitlist');
+          // Optional: Handle error state here
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -120,18 +141,20 @@ const HeroSection = () => {
                   />
                   <button
                     type="submit"
-                    className="hidden md:flex absolute right-2 top-2 bottom-2 px-8 bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-bold rounded-full hover:bg-white transition-all items-center gap-2"
+                    disabled={isLoading}
+                    className="hidden md:flex absolute right-2 top-2 bottom-2 px-8 bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-bold rounded-full hover:bg-white transition-all items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Join the Party
+                    {isLoading ? 'Joining...' : 'Join the Party'}
                   </button>
                 </div>
 
                 {/* Mobile Button - Visible only on mobile */}
                 <button
                   type="submit"
-                  className="md:hidden w-full h-[56px] bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-bold rounded-xl hover:bg-white transition-all flex items-center justify-center gap-2 shadow-lg"
+                  disabled={isLoading}
+                  className="md:hidden w-full h-[56px] bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-bold rounded-xl hover:bg-white transition-all flex items-center justify-center gap-2 shadow-lg disabled:opacity-70"
                 >
-                  Join the Party
+                  {isLoading ? 'Joining...' : 'Join the Party'}
                 </button>
               </motion.form>
             ) : (
