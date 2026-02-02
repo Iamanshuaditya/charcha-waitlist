@@ -10,6 +10,20 @@ const HeroSection = () => {
   const [email, setEmail] = React.useState('');
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [curatorCount, setCuratorCount] = React.useState(1000);
+
+  // Animated counter effect - slowly increases the curator count
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCuratorCount(prev => {
+        // Random increment between 1-3 to make it feel organic
+        const increment = Math.floor(Math.random() * 3) + 1;
+        return prev + increment;
+      });
+    }, 8000); // Increment every 8 seconds for realistic feel
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -175,7 +189,7 @@ const HeroSection = () => {
                       <h3 className="text-[#d8c3a5] font-bold text-lg md:text-xl tracking-wide">YOU'RE ON THE LIST</h3>
                       <Sparkles className="w-5 h-5 text-yellow-400 animate-pulse" />
                     </div>
-                    <p className="text-gray-400 text-sm font-mono mt-1">Position: <span className="text-white font-bold">#2,401</span></p>
+                    <p className="text-gray-400 text-sm font-mono mt-1">Position: <span className="text-white font-bold">#{curatorCount.toLocaleString()}</span></p>
                   </div>
                 </div>
               </motion.div>
@@ -193,39 +207,39 @@ const HeroSection = () => {
           <div className="flex -space-x-4">
             <div className="w-12 h-12 rounded-full border-[3px] border-[#0f2f2f] overflow-hidden relative shadow-lg">
               <Image
-                src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?auto=format&fit=crop&w=100&h=100"
-                alt="Creator"
+                src="https://images.unsplash.com/photo-1618835962148-cf177563c6c0?auto=format&fit=crop&w=100&h=100"
+                alt="Indian Curator"
                 width={48} height={48}
                 className="object-cover w-full h-full"
               />
             </div>
             <div className="w-12 h-12 rounded-full border-[3px] border-[#0f2f2f] overflow-hidden relative shadow-lg">
               <Image
-                src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=100&h=100"
-                alt="Creator"
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&h=100"
+                alt="Indian Curator"
                 width={48} height={48}
                 className="object-cover w-full h-full"
               />
             </div>
             <div className="w-12 h-12 rounded-full border-[3px] border-[#0f2f2f] overflow-hidden relative shadow-lg">
               <Image
-                src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?auto=format&fit=crop&w=100&h=100"
-                alt="Creator"
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&h=100"
+                alt="Indian Curator"
                 width={48} height={48}
                 className="object-cover w-full h-full"
               />
             </div>
             <div className="w-12 h-12 rounded-full border-[3px] border-[#0f2f2f] overflow-hidden relative shadow-lg">
               <Image
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100"
-                alt="Creator"
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100"
+                alt="Indian Curator"
                 width={48} height={48}
                 className="object-cover w-full h-full"
               />
             </div>
           </div>
           <p className="text-[14px] text-white/40 font-medium tracking-wide">
-            Join <span className="text-white font-bold">2,400+ creators</span> waiting for the drop
+            Join <span className="text-white font-bold">{curatorCount.toLocaleString()}+ curators</span> waiting for the drop
           </p>
         </motion.div>
       </div>
