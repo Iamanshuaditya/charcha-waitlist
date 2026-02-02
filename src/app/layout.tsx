@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
+import GeometricBackground from "@/components/GeometricBackground";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 
@@ -17,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <GeometricBackground />
         <Script
           id="orchids-browser-logs"
           src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/orchids-browser-logs.js"
@@ -35,7 +36,6 @@ export default function RootLayout({
           data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
         />
         {children}
-        <VisualEditsMessenger />
       </body>
     </html>
   );

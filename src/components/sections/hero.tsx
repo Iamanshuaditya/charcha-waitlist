@@ -1,7 +1,19 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 
 const HeroSection = () => {
+  const [email, setEmail] = React.useState('');
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setIsSubmitted(true);
+    }
+  };
+
   return (
     <section className="relative flex flex-col items-center justify-start w-full min-h-[600px] pt-[100px] pb-[60px] px-6 text-center overflow-hidden">
       {/* Background Hero Glow */}
@@ -13,46 +25,51 @@ const HeroSection = () => {
       />
 
       <div className="relative z-10 flex flex-col items-center max-w-[800px] w-full mx-auto">
-        {/* Chacha Logo Icon / Badge */}
-        <div className="mb-8 w-[80px] h-[80px] bg-gradient-to-br from-[#1A1A2E] to-[#3730A3] rounded-[24px] flex items-center justify-center p-4 shadow-lg rotate-3 hover:rotate-6 transition-transform duration-500 ease-out">
-          <span className="text-white font-display text-4xl font-bold">C</span>
-        </div>
-
         {/* Soft Launch Badge */}
-        <div className="mb-6 bg-[#F3F0FF] border border-[#E0E7FF] px-4 py-1.5 rounded-full inline-flex items-center gap-2">
-          <div className="w-2 h-2 bg-[#FF9933] rounded-full animate-pulse"></div>
-          <p className="text-[14px] font-medium text-[#3730A3] tracking-wide uppercase">
-            Soft Launch @ Design India 2026
+        <div className="mb-6 mt-16 bg-white/5 border border-white/10 px-6 py-2 rounded-full inline-flex items-center backdrop-blur-md">
+          <p className="text-[14px] font-medium text-white/90 tracking-widest uppercase">
+            Soft Launch 2026
           </p>
         </div>
 
         {/* Headline */}
-        <h1 className="mb-6 text-[#1A1A2E] text-[56px] md:text-[72px] font-semibold leading-[1.05] tracking-[-0.04em] font-display">
-          India, meet your <br className="hidden md:block" /> new <span className="text-[#FF9933]">video adda</span>.
+        <h1 className="mb-6 text-white text-[56px] md:text-[72px] font-semibold leading-[1.05] tracking-[-0.04em] font-display">
+          India, meet your <br className="hidden md:block" /> new <span className="text-[#d8c3a5]">video adda</span>.
         </h1>
 
         {/* Description */}
-        <p className="mb-10 text-[#6B7280] text-lg md:text-xl leading-[1.6] font-normal font-body max-w-[600px]">
+        <p className="mb-10 text-gray-300 text-lg md:text-xl leading-[1.6] font-normal font-body max-w-[600px]">
           We’re building the future of desi storytelling. No corporate algorithms, just pure creativity. Join the community before we go global.
         </p>
 
         {/* Waitlist Form */}
         <div className="w-full mb-10">
-          <form className="relative flex items-center w-full max-w-[480px] mx-auto group">
-            <div className="relative w-full shadow-lg rounded-full">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="w-full h-[64px] pl-8 pr-[160px] bg-white border border-[#E0E7FF] rounded-full text-lg focus:ring-2 focus:ring-[#3730A3]/20 focus:border-[#3730A3] transition-all outline-none text-[#1A1A2E] placeholder:text-[#9CA3AF]"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-2 bottom-2 px-8 bg-[#1A1A2E] text-white text-[16px] font-semibold rounded-full hover:bg-[#3730A3] transition-all btn-transition active:scale-95 whitespace-nowrap"
-              >
-                Join the Party
-              </button>
-            </div>
-          </form>
+          <div className="relative h-[64px] w-full max-w-[480px] mx-auto">
+            {!isSubmitted ? (
+              <form onSubmit={handleSubmit} className="relative flex items-center w-full group transition-all duration-300">
+                <div className="relative w-full shadow-lg rounded-full">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="w-full h-[64px] pl-8 pr-[160px] bg-white/10 border border-white/20 rounded-full text-lg focus:ring-2 focus:ring-[#d8c3a5]/50 focus:border-[#d8c3a5] transition-all outline-none text-white placeholder:text-gray-400 backdrop-blur-md"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-2 top-2 bottom-2 px-8 bg-[#d8c3a5] text-[#0f2f2f] text-[16px] font-semibold rounded-full hover:bg-white transition-all btn-transition active:scale-95 whitespace-nowrap"
+                  >
+                    Join the Party
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-[#d8c3a5] rounded-full animate-in fade-in zoom-in duration-300">
+                <span className="text-[#0f2f2f] font-bold text-lg">Welcome to the party! 🚀</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Social Proof */}
@@ -91,8 +108,8 @@ const HeroSection = () => {
               />
             </div>
           </div>
-          <p className="text-[15px] text-[#6B7280] font-body">
-            Join <span className="text-[#1A1A2E] font-bold">2,400+ creators</span> waiting for the drop
+          <p className="text-[15px] text-gray-400 font-body">
+            Join <span className="text-white font-bold">2,400+ creators</span> waiting for the drop
           </p>
         </div>
       </div>

@@ -1,38 +1,75 @@
 import React from 'react';
-import { Twitter, Instagram, Linkedin, Heart } from 'lucide-react';
+import { Twitter, Instagram, Linkedin, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#FAFAFA] border-t border-[#E5E5E5] py-[60px] px-6">
-      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer className="w-full pt-[120px] pb-12 px-6 relative overflow-hidden">
+      {/* Top Border */}
+      <div className="absolute top-0 left-6 right-6 h-[1px] bg-white/10" />
 
-        {/* Brand & Copy */}
-        <div className="flex flex-col items-center md:items-start gap-4">
-          <span className="text-[24px] font-display font-bold text-[#1A1A2E]">Chacha</span>
-          <p className="text-[#666666] text-sm flex items-center gap-1">
-            Built with <Heart size={14} className="fill-red-500 text-red-500" /> in India for the world.
+      <div className="max-w-[1400px] mx-auto">
+        {/* Main Content */}
+        <div className="flex flex-col md:flex-row justify-between items-start mb-24 gap-16">
+
+          {/* Brand Statement */}
+          <div className="max-w-[400px]">
+            <h3 className="text-white font-display text-2xl mb-6">Chacha.</h3>
+            <p className="text-gray-400 font-light leading-relaxed">
+              The new home for India's creative class.
+              Building the infrastructure for the next generation of storytelling.
+            </p>
+          </div>
+
+          {/* Navigation Columns */}
+          <div className="flex flex-col md:flex-row gap-10 md:gap-32 w-full md:w-auto">
+            <div className="grid grid-cols-2 gap-10 md:flex md:gap-32 w-full">
+              <div className="flex flex-col gap-6">
+                <span className="text-xs uppercase tracking-widest text-[#d8c3a5] font-medium">Platform</span>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Creators</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Brands</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Events</a>
+              </div>
+              <div className="flex flex-col gap-6">
+                <span className="text-xs uppercase tracking-widest text-[#d8c3a5] font-medium">Company</span>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Press</a>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              <span className="text-xs uppercase tracking-widest text-[#d8c3a5] font-medium">Social</span>
+              <div className="flex gap-4 md:flex-col md:gap-6">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                  <span className="hidden md:inline">Twitter</span> <Twitter size={20} className="md:hidden" /> <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                  <span className="hidden md:inline">Instagram</span> <Instagram size={20} className="md:hidden" /> <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                  <span className="hidden md:inline">LinkedIn</span> <Linkedin size={20} className="md:hidden" /> <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Huge Brand Typography */}
+        <div className="w-full overflow-hidden mb-16">
+          <h1 className="text-[18vw] md:text-[15vw] leading-[0.8] font-display font-bold text-white/5 select-none tracking-tight text-center md:text-left">
+            CHACHA
+          </h1>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5 text-sm">
+          <p className="text-gray-500">
+            &copy; 2026 Chacha Media Pvt Ltd. All rights reserved.
           </p>
-        </div>
-
-        {/* Socials */}
-        <div className="flex items-center gap-6">
-          <a href="#" className="p-3 bg-white border border-[#E5E5E5] rounded-full text-[#1A1A2E] hover:border-[#3730A3] hover:text-[#3730A3] transition-colors">
-            <Twitter size={20} />
-          </a>
-          <a href="#" className="p-3 bg-white border border-[#E5E5E5] rounded-full text-[#1A1A2E] hover:border-[#3730A3] hover:text-[#3730A3] transition-colors">
-            <Instagram size={20} />
-          </a>
-          <a href="#" className="p-3 bg-white border border-[#E5E5E5] rounded-full text-[#1A1A2E] hover:border-[#3730A3] hover:text-[#3730A3] transition-colors">
-            <Linkedin size={20} />
-          </a>
-        </div>
-      </div>
-
-      <div className="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-[#E5E5E5] w-full flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[#999999]">
-        <p className="text-[#666666]">&copy; 2026 Chacha Media Pvt Ltd.</p>
-        <div className="flex gap-6">
-          <a href="#" className="hover:text-[#1A1A2E]">Privacy Policy</a>
-          <a href="#" className="hover:text-[#1A1A2E]">Terms of Service</a>
+          <div className="flex gap-8">
+            <a href="#" className="text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="text-gray-500 hover:text-white transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-background: #FDFBF7;
-  --color-foreground: #1A1A2E;
+  --color-background: transparent;
+  --color-foreground: #EDEDED;
 
   --color-card: #FFFFFF;
   --color-card-foreground: #1A1A2E;
@@ -97,8 +97,8 @@
   }
 
   :root {
-    --background: #F5F5F5;
-    --foreground: #1A1A1A;
+    --background: transparent;
+    --foreground: #EDEDED;
     --card: #F0F0F0;
     --card-foreground: #1A1A1A;
     --popover: #FFFFFF;
@@ -135,18 +135,21 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
+  /* Responsive Typography */
   h1 {
     font-family: var(--font-display);
-    font-size: 64px;
+    font-size: clamp(36px, 8vw, 64px);
     font-weight: 500;
     line-height: 1.1;
     letter-spacing: -0.04em;
@@ -154,7 +157,7 @@
 
   h2 {
     font-family: var(--font-display);
-    font-size: 48px;
+    font-size: clamp(28px, 6vw, 48px);
     font-weight: 500;
     line-height: 1.2;
     letter-spacing: -0.03em;
@@ -162,7 +165,7 @@
 
   h3 {
     font-family: var(--font-display);
-    font-size: 20px;
+    font-size: clamp(18px, 3vw, 20px);
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: -0.01em;
@@ -170,19 +173,34 @@
 
   p {
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: clamp(16px, 2.5vw, 18px);
     font-weight: 400;
     line-height: 1.6;
     color: var(--color-secondary);
   }
 
+  /* Responsive Container */
   .container {
     width: 100%;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
   }
 
   .font-display {
@@ -203,12 +221,103 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
+  .soft-shadow-lg {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  }
+
   .btn-transition {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   .btn-transition:hover {
     opacity: 0.9;
     transform: scale(0.98);
+  }
+
+  .btn-transition:active {
+    transform: scale(0.95);
+  }
+
+  /* Responsive section padding */
+  .section-padding {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  @media (min-width: 640px) {
+    .section-padding {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
+  }
+
+  /* No scroll when mobile menu is open */
+  .no-scroll {
+    overflow: hidden;
+  }
+
+  /* Smooth fade animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Better focus states for accessibility */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Geometric Background */
+.geometric-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #0f2f2f;
+  z-index: -1;
+}
+
+.geometric-pattern {
+  width: 200%;
+  height: 200%;
+  animation: driftUp 60s linear infinite;
+  opacity: 0.1;
+}
+
+.geometric-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(15, 47, 47, 0.8) 100%);
+  pointer-events: none;
+}
+
+@keyframes driftUp {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-240px);
   }
 }
